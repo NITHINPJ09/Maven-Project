@@ -13,7 +13,7 @@ pipeline {
             script {
               if (sh(script: "git log -1 | grep '.*\\[ci skip\\].*'", returnStatus: true) == 0) {
                 currentBuild.result = 'NOT_BUILT'
-                error "'[ci skip]' found in git commit message. Aborting.."
+                error "'[ci skip]' found in git commit message. Aborting."
               }
             }
           }
