@@ -7,7 +7,7 @@ pipeline {
             }
         }   
        
-        stage('Run CI?') {
+        stage('Run CI') {
           agent any
           steps {
             script {
