@@ -7,13 +7,13 @@ pipeline {
             }
         }   
        
-        stage('Run CI') {
+        stage('Run CI?') {
           agent any
           steps {
             script {
               if (sh(script: "git log -1 | grep '.*\\[ci skip\\].*'", returnStatus: true) == 0) {
                 currentBuild.result = 'NOT_BUILT'
-                error 'Aborting because commit message contains [ci skip]'
+                error "'[ci skip]' found in git commit message. Aborting."
               }
             }
           }
