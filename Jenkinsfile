@@ -1,7 +1,7 @@
 pipeline {
     agent any 
     stages {
-        stage('---Version---') { 
+        stage('---Version Number---') { 
             steps {
                 sh "mvn -version"
             }
