@@ -8,7 +8,9 @@ pipeline {
         }   
        
         stage('Run CI?') {
-          agent any
+          when {
+                  branch 'master'             
+          }
           steps {
             script {
               sh 'git log -1'
