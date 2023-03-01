@@ -4,7 +4,6 @@ pipeline {
         stage('---Version---') { 
             steps {
                 sh "mvn -version"
-                echo "${env.BRANCH_NAME}"
             }
         }   
        
