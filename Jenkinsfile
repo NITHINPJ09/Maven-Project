@@ -10,7 +10,6 @@ pipeline {
         stage('Run CI?') {
           steps {
             script {
-              sh 'echo Branch Name: $BRANCH_NAME'
               sh 'git log -1'
               if (sh(script: "git log -1 | grep '.*\\[ci skip\\].*'", returnStatus: true) == 0) {
                 currentBuild.result = 'NOT_BUILT'
