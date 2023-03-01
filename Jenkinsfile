@@ -8,9 +8,6 @@ pipeline {
         }   
        
         stage('Run CI?') {
-          when {
-                  branch 'master'             
-          }
           steps {
             script {
               sh 'git log -1'
