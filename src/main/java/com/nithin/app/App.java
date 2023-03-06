@@ -2,9 +2,6 @@ package com.nithin.app;
 
 import java.util.Scanner;  
 
-// import Cowsay class from the library
-import com.github.ricksbrown.cowsay.Cowsay;
-
 public class App 
 {
     public static void main( String[] args )
