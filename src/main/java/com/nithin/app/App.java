@@ -19,14 +19,6 @@ public class App
         y = sc.nextInt();   
         sum = app.sum(x, y);
         System.out.println( "Sum : " + sum);
-
-        // We can specify the arguments and get the display
-        // string from the `Cowsay.say` method
-        String[] cowArgs = new String[] { String.valueOf(sum) };
-        String cowString = Cowsay.say(cowArgs);
-
-        // print the final output string
-        System.out.printf(cowString);
     }
 
     public int sum(int a, int b)
