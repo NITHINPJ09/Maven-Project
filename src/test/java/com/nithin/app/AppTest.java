@@ -17,7 +17,7 @@ public class AppTest
     @Test
     public void testSum()
     {
-        int expected = 40;
+        int expected = 30;
         int actual = app.sum(10, 20);
         assertEquals(expected, actual);
     }
