@@ -1,24 +1,13 @@
 pipeline {
     agent any 
     stages {
+        
         stage('---Version---') { 
             steps {
                 sh "mvn -version"
             }
         }   
-       
-        stage('Run CI?') {
-          steps {
-            script {
-              sh 'git log -1'
-              if (sh(script: "git log -1 | grep '.*\\[ci skip\\].*'", returnStatus: true) == 0) {
-                currentBuild.result = 'NOT_BUILT'
-                error "'[ci skip]' found in git commit message. Aborting..."
-              }
-            }
-          }
-        }        
-        
+                     
         stage('---Clean---') { 
             steps {
                 sh "mvn clean"
@@ -30,5 +19,6 @@ pipeline {
                 sh "mvn package"
             }
         }
+        
     }
 }
