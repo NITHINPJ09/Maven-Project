@@ -22,7 +22,7 @@ pipeline {
         
         stage('---Deployment---') { 
             steps {
-                sshagent(['web_server_id']) {
+                sshagent(['server_id']) {
                     sh '''
                         ssh -o StrictHostKeyChecking=accept-new azureuser@74.235.17.41 <<'EOF'
                         echo "These commands will be run on: $( uname -a )"
