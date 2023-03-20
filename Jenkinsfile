@@ -24,7 +24,7 @@ pipeline {
             steps {
                 sshagent(['server_id']) {
                     sh '''
-                        ssh -T azureuser@74.235.79.120 <<'EOF'
+                        ssh -o StrictHostKeyChecking=accept-new -T azureuser@74.235.79.120 <<EOF
                         echo "These commands will be run on: $( uname -a )"
                         echo "They are executed by: $( whoami )"
                         scp target/Calculator-1.0-SNAPSHOT.jar azureuser@74.235.79.120:/home/azureuser
