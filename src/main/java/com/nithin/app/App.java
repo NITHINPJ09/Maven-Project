@@ -6,7 +6,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Welcome to DevOps!" );
+        System.out.println( "Welcome to DevOps@InApp!" );
         App app = new App();
         int x, y, sum;  
         Scanner sc = new Scanner(System.in);  
