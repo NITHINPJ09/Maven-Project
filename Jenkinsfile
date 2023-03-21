@@ -35,7 +35,7 @@ pipeline {
         stage('---Deployment---') { 
             steps {
                 sshagent(['server_id']) {
-                    sh 'scp -o StrictHostKeyChecking=accept-new target/Calculator-1.0-SNAPSHOT.jar azureuser@20.163.185.120:/home/azureuser'
+                    sh 'scp target/Calculator-1.0-SNAPSHOT.jar azureuser@20.163.225.176:/home/azureuser'
                 }
             }
         }
