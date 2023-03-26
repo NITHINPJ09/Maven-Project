@@ -1,24 +1,15 @@
-package com.nithin.app;
-
+package com.nithin.ap;
 import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
 
-
-/**
- * Unit test for simple App.
- */
 public class AppTest 
 {
-    App app = new App();
-    /**
-     * Rigorous Test :-)
-     */
+    App obj = new App();
     @Test
     public void testSum()
     {
         int expected = 40;
-        int actual = app.sum(10, 30);
+        int actual = obj.sum(10, 30);
         assertEquals(expected, actual);
     }
 }
