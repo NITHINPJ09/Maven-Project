@@ -13,7 +13,7 @@ public class App
         x = sc.nextInt();  
         System.out.print("Enter the second number: ");  
         y = sc.nextInt();   
-        result = app.sum(x, y);
+        result = obj.sum(x, y);
         System.out.println("Sum : " + result);
     }
 
