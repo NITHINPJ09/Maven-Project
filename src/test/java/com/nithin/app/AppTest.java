@@ -1,4 +1,4 @@
-package com.nithin.app;
+package com.nithin.ap;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
