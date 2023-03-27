@@ -18,7 +18,7 @@ public class App
         result = obj.sum(x, y);
         String[] cowArgs = new String[]{String.valueOf(result)};
         String cowString = Cowsay.say(cowArgs);
-	    System.out.println(cowString);
+	System.out.println(cowString);
     }
 
     public int sum(int a, int b)
