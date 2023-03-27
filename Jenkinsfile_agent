@@ -1,0 +1,29 @@
+pipeline {
+    agent { 
+        label 'linux' 
+    }
+    tools {
+        maven 'maven-3.9.0'
+    }
+    stages {
+        
+        stage('---Version---') { 
+            steps {
+                sh "mvn -version"
+            }
+        }   
+                     
+        stage('---Clean---') { 
+            steps {
+                sh "mvn clean"
+            }
+        }
+        
+        stage('---Package---') { 
+            steps {
+                sh "mvn package"
+            }
+        }
+        
+    }
+}
