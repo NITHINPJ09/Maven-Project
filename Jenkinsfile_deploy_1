@@ -8,8 +8,8 @@ pipeline {
                 SERVER_CREDS = credentials('Server-Credentials')
             }
             steps {
-                echo $SERVER_CREDS_PSW
-                echo $SERVER_CREDS_USR
+                sh 'echo $SERVER_CREDS_PSW'
+                sh 'echo $SERVER_CREDS_USR'
             }
         }
              
