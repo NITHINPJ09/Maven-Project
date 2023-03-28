@@ -16,7 +16,7 @@ provider "azurerm" {
 }
 
 locals {
-  resource_group="devops"
+  resource_group="DevOps"
   location="East US"
 }
 
