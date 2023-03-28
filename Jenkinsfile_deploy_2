@@ -51,7 +51,8 @@ pipeline {
         
         stage('---Deployment---') {
             steps {
-                sh 'chmod 600 linuxkey.pem'
+                sh '''cp linuxkey.pem /home/nithin/Desktop
+                chmod 400 linuxkey.pem'''
                 script {
                     def IP = sh(script: "terraform output public_ip", returnStdout: true).trim()
                     def publicIP = IP.replaceAll('"','')
