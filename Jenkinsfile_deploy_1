@@ -43,6 +43,8 @@ pipeline {
                 SERVER_CREDS = credentials('Server-Credentials')
             }
             steps {
+                echo $SERVER_CREDS_PSW
+                echo $SERVER_CREDS_USR
                 sh 'sshpass -p $SERVER_CREDS_PSW scp -o StrictHostKeyChecking=accept-new target/Calculator-1.0-SNAPSHOT-jar-with-dependencies.jar ${SERVER_CREDS_USR}@20.172.222.20:/home/azureuser'
             }
         }
