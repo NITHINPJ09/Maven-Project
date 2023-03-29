@@ -129,7 +129,7 @@ resource "azurerm_storage_container" "credentials" {
 }
 
 resource "azurerm_storage_blob" "key" {
-  name                   = "key"
+  name                   = "linuxkey.pem"
   storage_account_name   = azurerm_storage_account.storage_account.name
   storage_container_name = azurerm_storage_container.credentials.name
   type                   = "Block"
