@@ -57,8 +57,7 @@ pipeline {
                 sh 'chmod 400 linuxkey.pem'
                 script {
                     def IP = sh(script: "terraform output public_ip", returnStdout: true).trim()
-                    def publicIP = IP.replaceAll('"','')
-                    env.PUBLIC_IP = publicIP
+                    env.PUBLIC_IP = IP.replaceAll('"','')
                 }
                 sh '''ssh -i linuxkey.pem -o StrictHostKeyChecking=accept-new -T linuxusr@$PUBLIC_IP <<EOF
                 echo "Testing..."
