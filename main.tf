@@ -16,7 +16,7 @@ provider "azurerm" {
 }
 
 locals {
-  resource_group="DevOps"
+  resource_group="app-grp"
   location="East US"
 }
 
@@ -113,4 +113,37 @@ resource "azurerm_public_ip" "app_public_ip" {
 
 output "public_ip" {
   value = azurerm_public_ip.app_public_ip.ip_address
+}
+
+resource "azurerm_storage_account" "storage_account" {
+  name                     = "privatekeystore10090"
+  resource_group_name      = local.resource_group
+  location                 = local.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+  allow_blob_public_access = true
+}
+
+# Here we are creating a container in the storage account
+resource "azurerm_storage_container" "data" {
+  name                  = "data"
+  storage_account_name  = "privatekeystore10090"
+  container_access_type = "private"
+}
+
+# This is used to upload a local file onto the container
+resource "azurerm_storage_blob" "sample" {
+  name                   = "sample.txt"
+  storage_account_name   = "appstore4577687"
+  storage_container_name = "data"
+  type                   = "Block"
+  source                 = "sample.txt"
+  # Here we we are adding a dependency. The file can only be uploaded if the container is present
+# We can access the attributes of a resource in terraform via the resource_type.resource_name
+
+  depends_on=[
+    azurerm_storage_container.data,
+    azurerm_linux_virtual_machine.linux_vm
+  ]
+
 }
