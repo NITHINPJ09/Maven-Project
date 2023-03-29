@@ -111,10 +111,6 @@ resource "azurerm_public_ip" "app_public_ip" {
   ]
 }
 
-output "public_ip" {
-  value = azurerm_public_ip.app_public_ip.ip_address
-}
-
 resource "azurerm_storage_account" "storage_account" {
   name                     = "privatekeystore10090"
   resource_group_name      = local.resource_group
@@ -141,5 +137,8 @@ resource "azurerm_storage_blob" "key" {
     azurerm_storage_container.data,
     azurerm_linux_virtual_machine.linux_vm
   ]
+}
 
+output "public_ip" {
+  value = azurerm_public_ip.app_public_ip.ip_address
 }
