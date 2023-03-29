@@ -56,14 +56,12 @@ resource "azurerm_network_interface" "app_interface" {
   name                = "app-interface"
   location            = local.location
   resource_group_name = local.resource_group
-
   ip_configuration {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.SubnetA.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id = azurerm_public_ip.app_public_ip.id
   }
-
   depends_on = [
     azurerm_virtual_network.app_network,
     azurerm_public_ip.app_public_ip
@@ -87,14 +85,12 @@ resource "azurerm_linux_virtual_machine" "linux_vm" {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
-
   source_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
     sku       = "18.04-LTS"
     version   = "latest"
   }
-
   depends_on = [
     azurerm_network_interface.app_interface,
     tls_private_key.linux_key
@@ -132,7 +128,6 @@ resource "azurerm_storage_blob" "key" {
   storage_container_name = azurerm_storage_container.credentials.name
   type                   = "Block"
   source                 = "linuxkey.pem"
-
   depends_on=[
     azurerm_storage_container.data,
     azurerm_linux_virtual_machine.linux_vm
