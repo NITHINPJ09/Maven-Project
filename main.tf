@@ -128,7 +128,7 @@ resource "azurerm_storage_blob" "key" {
   type                   = "Block"
   source                 = "linuxkey.pem"
   depends_on=[
-    azurerm_storage_container.data,
+    azurerm_storage_container.credentials,
     azurerm_linux_virtual_machine.linux_vm
   ]
 }
