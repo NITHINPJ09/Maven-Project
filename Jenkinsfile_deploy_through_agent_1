@@ -3,6 +3,7 @@ pipeline {
         label 'linux' 
     }
     tools {
+        maven 'maven-3.9.0'
         terraform 'Terraform-1.4.2'
     }
     stages {
