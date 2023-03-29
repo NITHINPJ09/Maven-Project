@@ -124,18 +124,18 @@ resource "azurerm_storage_account" "storage_account" {
   allow_blob_public_access = true
 }
 
-resource "azurerm_storage_container" "data" {
-  name                  = "data"
-  storage_account_name  = "privatekeystore10090"
+resource "azurerm_storage_container" "credentials" {
+  name                  = "credentials"
+  storage_account_name  = azurerm_storage_account.storage_account.name
   container_access_type = "private"
 }
 
-resource "azurerm_storage_blob" "sample" {
-  name                   = "sample.txt"
-  storage_account_name   = "appstore4577687"
-  storage_container_name = "data"
+resource "azurerm_storage_blob" "key" {
+  name                   = "key"
+  storage_account_name   = azurerm_storage_account.storage_account.name
+  storage_container_name = azurerm_storage_container.credentials.name
   type                   = "Block"
-  source                 = "sample.txt"
+  source                 = "linuxkey.pem"
 
   depends_on=[
     azurerm_storage_container.data,
