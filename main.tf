@@ -113,12 +113,19 @@ resource "azurerm_storage_account" "storage_account" {
   location                 = local.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  depends_on = [
+    azurerm_resource_group.app_grp
+  ]
 }
 
 resource "azurerm_storage_container" "credentials" {
   name                  = "credentials"
   storage_account_name  = azurerm_storage_account.storage_account.name
   container_access_type = "private"
+  depends_on = [
+    azurerm_resource_group.app_grp,
+    azurerm_storage_account.storage_account
+  ]
 }
 
 resource "azurerm_storage_blob" "key" {
@@ -127,7 +134,9 @@ resource "azurerm_storage_blob" "key" {
   storage_container_name = azurerm_storage_container.credentials.name
   type                   = "Block"
   source                 = "linuxkey.pem"
-  depends_on=[
+  depends_on = [
+    azurerm_resource_group.app_grp,
+    azurerm_storage_account.storage_account,
     azurerm_storage_container.credentials,
     azurerm_linux_virtual_machine.linux_vm
   ]
