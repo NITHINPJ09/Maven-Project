@@ -113,10 +113,6 @@ resource "azurerm_storage_account" "storage_account" {
   location                 = local.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
-  container_properties {
-    default_action = "Deny"
-    prevent_bypass = "Enabled"
-  }
 }
 
 resource "azurerm_storage_container" "credentials" {
