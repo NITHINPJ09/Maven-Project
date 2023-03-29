@@ -124,22 +124,18 @@ resource "azurerm_storage_account" "storage_account" {
   allow_blob_public_access = true
 }
 
-# Here we are creating a container in the storage account
 resource "azurerm_storage_container" "data" {
   name                  = "data"
   storage_account_name  = "privatekeystore10090"
   container_access_type = "private"
 }
 
-# This is used to upload a local file onto the container
 resource "azurerm_storage_blob" "sample" {
   name                   = "sample.txt"
   storage_account_name   = "appstore4577687"
   storage_container_name = "data"
   type                   = "Block"
   source                 = "sample.txt"
-  # Here we we are adding a dependency. The file can only be uploaded if the container is present
-# We can access the attributes of a resource in terraform via the resource_type.resource_name
 
   depends_on=[
     azurerm_storage_container.data,
