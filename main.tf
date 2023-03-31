@@ -7,11 +7,16 @@ terraform {
   }
 }
 
+variable "subscription_id" {}
+variable "client_id" {}
+variable "client_secret" {}
+variable "tenant_id" {}
+
 provider "azurerm" {
-  subscription_id = "0651313e-dbf5-4736-ac89-dbe2383f4a7c"
-  client_id       = "1ecc7f7a-6bf4-4dbc-a9c3-9a28e412f5e8"
-  client_secret   = "tea8Q~WfpJaYQOzOEmZ8KS_Hos1NXPei0v~qobUq"
-  tenant_id       = "94783a06-e193-44c2-8965-0ce21f3d080d"
+  subscription_id = var.subscription_id
+  client_id       = var.client_id
+  client_secret   = var.client_secret
+  tenant_id       = var.tenant_id
   features {}
 }
 
