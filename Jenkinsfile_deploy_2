@@ -43,21 +43,17 @@ pipeline {
         
         stage('---Infrastructure Provisioning---') { 
             environment {
-                ASI = credentials('AZURE_SUBSCRIPTION_ID')
-                ACI = credentials('AZURE_CLIENT_ID')
-                ACS = credentials('AZURE_CLIENT_SECRET')
-                ATI = credentials('AZURE_TENANT_ID')
+                TF_VAR_ASI = credentials('AZURE_SUBSCRIPTION_ID')
+                TF_VAR_ACI = credentials('AZURE_CLIENT_ID')
+                TF_VAR_ACS = credentials('AZURE_CLIENT_SECRET')
+                TF_VAR_ATI = credentials('AZURE_TENANT_ID')
             }
             steps {
-                sh '''export TF_VAR_subscription_id=$ASI
-                export TF_VAR_client_id=$ACI
-                export TF_VAR_client_secret=$ACS
-                export TF_VAR_tenant_id=$ATI
-                terraform init
+                sh '''terraform init
                 terraform apply -auto-approve'''
             }
-        }  
-
+        }        
+        
         stage('---Deployment---') {
             steps {
                 sh 'chmod 400 linuxkey.pem'
