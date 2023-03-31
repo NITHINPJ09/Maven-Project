@@ -47,7 +47,7 @@ pipeline {
                 TF_VAR_ACI = credentials('AZURE_CLIENT_ID')
                 TF_VAR_ACS = credentials('AZURE_CLIENT_SECRET')
                 TF_VAR_ATI = credentials('AZURE_TENANT_ID')
-                TF_VAR_ASAK = credentials('AZURE_STORAGE_ACCESS_KEY')
+                TF_VAR_ACCESS_KEY = credentials('AZURE_STORAGE_ACCESS_KEY')
             }
             steps {
                 sh '''terraform init
