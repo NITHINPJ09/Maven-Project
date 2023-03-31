@@ -13,6 +13,7 @@ terraform {
     storage_account_name = "mavenproject100sa2023"
     container_name       = "terraform"
     key                  = "terraform.tfstate"
+    access_key           = var.access_key
   }
 }
 
@@ -20,6 +21,7 @@ variable "ASI" {}
 variable "ACI" {}
 variable "ACS" {}
 variable "ATI" {}
+variable "access_key" {}
 
 provider "azurerm" {
   subscription_id = var.ASI
