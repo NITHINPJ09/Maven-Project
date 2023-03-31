@@ -11,6 +11,7 @@ variable "ASI" {}
 variable "ACI" {}
 variable "ACS" {}
 variable "ATI" {}
+variable "ASAK" {}
 
 provider "azurerm" {
   subscription_id = var.ASI
