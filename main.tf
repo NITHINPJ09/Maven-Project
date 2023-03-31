@@ -11,7 +11,6 @@ variable "ASI" {}
 variable "ACI" {}
 variable "ACS" {}
 variable "ATI" {}
-variable "ASAK" {}
 
 provider "azurerm" {
   subscription_id = var.ASI
@@ -27,7 +26,6 @@ terraform {
     storage_account_name = "mavenproject100sa2023"
     container_name       = "terraform"
     key                  = "terraform.tfstate"
-    access_key           = var.ASAK
   }
 }
 
