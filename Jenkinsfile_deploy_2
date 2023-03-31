@@ -41,14 +41,23 @@ pipeline {
             }
         }
         
-        stage('---Infrastructure Provisioning---') {
-            steps {
-                sh '''terraform init
-                terraform plan -out=main.tfplan
-                terraform apply -auto-approve main.tfplan'''
+        stage('---Infrastructure Provisioning---') { 
+            environment {
+                ASI = credentials('AZURE_SUBSCRIPTION_ID')
+                ACI = credentials('AZURE_CLIENT_ID')
+                ACS = credentials('AZURE_CLIENT_SECRET')
+                ATI = credentials('AZURE_TENANT_ID')
             }
-        }
-        
+            steps {
+                sh '''export TF_VAR_subscription_id=$ASI
+                export TF_VAR_client_id=$ACI
+                export TF_VAR_client_secret=$ACS
+                export TF_VAR_tenant_id=$ATI
+                terraform init
+                terraform apply -auto-approve'''
+            }
+        }  
+
         stage('---Deployment---') {
             steps {
                 sh 'chmod 400 linuxkey.pem'
