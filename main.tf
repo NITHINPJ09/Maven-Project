@@ -1,16 +1,16 @@
 resource "tls_private_key" "linux_key" {
   algorithm = "RSA"
-  rsa_bits = 4096
+  rsa_bits  = 4096
 }
 
 resource "local_file" "linuxkey" {
-  filename=var.local_file_name  
-  content=tls_private_key.linux_key.private_key_pem 
+  filename = var.local_file_name
+  content  = tls_private_key.linux_key.private_key_pem
 }
 
-resource "azurerm_resource_group" "app_grp"{
-  name=var.resource_group_name
-  location=var.resource_group_location
+resource "azurerm_resource_group" "app_grp" {
+  name     = var.resource_group_name
+  location = var.resource_group_location
 }
 
 resource "azurerm_virtual_network" "app_network" {
@@ -35,7 +35,7 @@ resource "azurerm_network_interface" "app_interface" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.SubnetA.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id = azurerm_public_ip.app_public_ip.id
+    public_ip_address_id          = azurerm_public_ip.app_public_ip.id
   }
 }
 
@@ -44,7 +44,7 @@ resource "azurerm_linux_virtual_machine" "linux_vm" {
   resource_group_name = azurerm_resource_group.app_grp.name
   location            = azurerm_resource_group.app_grp.location
   size                = "Standard_D2s_v3"
-  admin_username      = var.username 
+  admin_username      = var.username
   network_interface_ids = [
     azurerm_network_interface.app_interface.id,
   ]
