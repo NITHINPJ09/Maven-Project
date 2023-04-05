@@ -14,27 +14,6 @@ terraform {
   }
 }
 
-variable "ASI" { 
-  type        = string
-  sensitive   = true
-  description = "Subscription ID of Azure"
-}
-variable "ACI" {
-  type        = string
-  sensitive   = true
-  description = "Client ID"
-}
-variable "ACS" {
-  type        = string
-  sensitive   = true
-  description = "Client Secret"
-}
-variable "ATI" {
-  type        = string
-  sensitive   = true
-  description = "Tenant ID"
-}
-
 provider "azurerm" {
   subscription_id = var.ASI
   client_id       = var.ACI
