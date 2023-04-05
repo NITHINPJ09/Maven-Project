@@ -18,7 +18,7 @@ variable "resource_group_name" {
   description = "Name of the Resource Group"
 }
 variable "resource_group_location" {
-  description = "location of the Resource Group"
+  description = "Location of the Resource Group"
 }
 variable "virtual_network_name" {
   description = "Name of the Virtual Network"
