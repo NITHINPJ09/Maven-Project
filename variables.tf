@@ -14,10 +14,6 @@ variable "ATI" {
   sensitive   = true
   description = "Tenant ID"
 }
-variable "ATI" {
-  sensitive   = true
-  description = "Tenant ID"
-}
 variable "resource_group_name" {
   description = "Name of the Resource Group"
 }
