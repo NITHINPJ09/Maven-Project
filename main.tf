@@ -28,7 +28,7 @@ resource "tls_private_key" "linux_key" {
 }
 
 resource "local_file" "linuxkey" {
-  filename="linuxkey.pem"  
+  filename=var.local_file_name  
   content=tls_private_key.linux_key.private_key_pem 
 }
 
@@ -38,21 +38,21 @@ resource "azurerm_resource_group" "app_grp"{
 }
 
 resource "azurerm_virtual_network" "app_network" {
-  name                = "app-network"
+  name                = var.virtual_network_name
   location            = azurerm_resource_group.app_grp.location
   resource_group_name = azurerm_resource_group.app_grp.name
-  address_space       = ["10.0.0.0/16"]
+  address_space       = [var.virtual_network_address_space]
 }
 
 resource "azurerm_subnet" "SubnetA" {
-  name                 = "SubnetA"
+  name                 = var.subnet_name
   resource_group_name  = azurerm_resource_group.app_grp.name
   virtual_network_name = azurerm_virtual_network.app_network.name
-  address_prefixes     = ["10.0.1.0/24"]
+  address_prefixes     = [var.subnet_address_prefixes]
 }
 
 resource "azurerm_network_interface" "app_interface" {
-  name                = "app-interface"
+  name                = var.network_interface_name
   location            = azurerm_resource_group.app_grp.location
   resource_group_name = azurerm_resource_group.app_grp.name
   ip_configuration {
@@ -64,16 +64,16 @@ resource "azurerm_network_interface" "app_interface" {
 }
 
 resource "azurerm_linux_virtual_machine" "linux_vm" {
-  name                = "linuxvm"
+  name                = var.virtual_machine_name
   resource_group_name = azurerm_resource_group.app_grp.name
   location            = azurerm_resource_group.app_grp.location
   size                = "Standard_D2s_v3"
-  admin_username      = "linuxusr"  
+  admin_username      = var.username 
   network_interface_ids = [
     azurerm_network_interface.app_interface.id,
   ]
   admin_ssh_key {
-    username   = "linuxusr"
+    username   = var.username
     public_key = tls_private_key.linux_key.public_key_openssh
   }
   os_disk {
@@ -89,14 +89,14 @@ resource "azurerm_linux_virtual_machine" "linux_vm" {
 }
 
 resource "azurerm_public_ip" "app_public_ip" {
-  name                = "app-public-ip"
+  name                = var.public_ip_name
   resource_group_name = azurerm_resource_group.app_grp.name
   location            = azurerm_resource_group.app_grp.location
   allocation_method   = "Static"
 }
 
 resource "azurerm_storage_account" "storage_account" {
-  name                     = "privatekeystore10090"
+  name                     = var.storage_account_name
   resource_group_name      = azurerm_resource_group.app_grp.name
   location                 = azurerm_resource_group.app_grp.location
   account_tier             = "Standard"
@@ -104,17 +104,17 @@ resource "azurerm_storage_account" "storage_account" {
 }
 
 resource "azurerm_storage_container" "credentials" {
-  name                  = "credentials"
+  name                  = var.storage_container_name
   storage_account_name  = azurerm_storage_account.storage_account.name
   container_access_type = "private"
 }
 
 resource "azurerm_storage_blob" "key" {
-  name                   = "linuxkey.pem"
+  name                   = var.storage_blob_name
   storage_account_name   = azurerm_storage_account.storage_account.name
   storage_container_name = azurerm_storage_container.credentials.name
   type                   = "Block"
-  source                 = "linuxkey.pem"
+  source                 = var.local_file_name
   depends_on = [
     azurerm_linux_virtual_machine.linux_vm
   ]
