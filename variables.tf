@@ -1,4 +1,4 @@
-variable "ASI" { 
+variable "ASI" {
   sensitive   = true
   description = "Subscription ID of Azure"
 }
