@@ -22,11 +22,6 @@ provider "azurerm" {
   features {}
 }
 
-locals {
-  resource_group="app-grp"
-  location="East US"
-}
-
 resource "tls_private_key" "linux_key" {
   algorithm = "RSA"
   rsa_bits = 4096
@@ -38,8 +33,8 @@ resource "local_file" "linuxkey" {
 }
 
 resource "azurerm_resource_group" "app_grp"{
-  name=local.resource_group
-  location=local.location
+  name=var.resource_group_name
+  location=var.resource_group_location
 }
 
 resource "azurerm_virtual_network" "app_network" {
