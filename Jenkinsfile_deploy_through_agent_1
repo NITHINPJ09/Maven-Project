@@ -53,7 +53,7 @@ pipeline {
                 ARM_ACCESS_KEY = credentials('AZURE_STORAGE_ACCESS_KEY')
             }
             steps {
-                sh '''terraform init -backend-config="access_key=$ASAK"
+                sh '''terraform init
                 terraform apply -auto-approve'''
             }
         } 
