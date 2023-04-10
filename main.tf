@@ -85,6 +85,9 @@ resource "azurerm_linux_virtual_machine" "linux_vm" {
     sku       = "18.04-LTS"
     version   = "latest"
   }
+  depends_on = [
+    azurerm_network_interface_security_group_association.ni_sg_association
+  ] 
 }
 
 resource "azurerm_public_ip" "app_public_ip" {
