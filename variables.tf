@@ -14,6 +14,10 @@ variable "subnet_name" {
   type        = string
   description = "Name of the Subnet"
 }
+variable "network_security_group_name" {
+  type        = string
+  description = "Name of the Network Security Group"
+}
 variable "network_interface_name" {
   type        = string
   description = "Name of the Network Interface"
