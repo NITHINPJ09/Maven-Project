@@ -45,7 +45,7 @@ pipeline {
         
         stage('---Deployment---') { 
             steps {
-                sshagent(['jar_deployment']) {
+                sshagent(['Server-Credentials']) {
                     sh 'scp -o StrictHostKeyChecking=accept-new target/Calculator-1.0-SNAPSHOT-jar-with-dependencies.jar azureuser@20.169.222.54:/home/azureuser'
                 }
             }
